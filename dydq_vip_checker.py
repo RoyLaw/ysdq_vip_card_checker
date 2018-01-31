@@ -20,8 +20,6 @@
 
 import requests
 
-
-
 cookie = '834e_phone=13813914000; PHPSESSID=f194c2e59fb60ef174aef17377ea6b46'
 header = {
     'Origin': 'http://viplnmp.tyhvip.com',
@@ -50,11 +48,17 @@ def check_card(card_num):
 
 def main():
     dict_file = open('.\\tools\\dict.txt', encoding='utf-8')
+    valid_count = 0
     for line in dict_file:
         line = line.strip('\n')
         line = line.strip('\ufeff')
         print(line)
-        print(check_card(line))
+        if check_card(line):
+            print('\n***有效卡号***\n')
+            valid_count += 1
+        else:
+            print('无效卡号')
+    print('\n命中有效卡号' + str(valid_count) + '个')
 
 
 if __name__ == '__main__':
